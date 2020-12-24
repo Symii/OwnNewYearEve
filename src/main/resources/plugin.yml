@@ -10,6 +10,9 @@ commands:
   setfirework:
     description: Set firework spawn position
     aliases: [sf]
+  newyear:
+    description: OwnNewYearEve plugin main command
+    aliases: [onye,ownnewyeareve]
 
 permissions:
   ownnewyeareve.admin:
