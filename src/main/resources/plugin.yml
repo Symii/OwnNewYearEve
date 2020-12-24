@@ -1,0 +1,17 @@
+name: OwnNewYearEve
+main: me.symi.newyear.OwnNewYearEve
+author: Symi
+version: 1.0
+api-version: 1.16
+website: https://github.com/Symii
+description: With this plugin you can create awesome new year eve fireworks event
+
+commands:
+  setfirework:
+    description: Set firework spawn position
+    aliases: [sf]
+
+permissions:
+  ownnewyeareve.admin:
+    default: op
+    description: Allows setfirework command
