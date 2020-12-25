@@ -31,7 +31,11 @@ public class FileManager {
         }
 
         config = new YamlConfiguration();
+        reloadConfig();
+    }
 
+    public void reloadConfig()
+    {
         try
         {
             config.load(config_file);
@@ -40,7 +44,6 @@ public class FileManager {
         {
             e.printStackTrace();
         }
-
     }
 
     public FileConfiguration getConfig()

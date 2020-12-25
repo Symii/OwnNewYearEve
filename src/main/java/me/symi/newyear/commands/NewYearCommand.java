@@ -31,6 +31,49 @@ public class NewYearCommand implements CommandExecutor {
 
         if(!(sender instanceof Player))
         {
+            if(sender.hasPermission("ownnewyeareve.admin"))
+            {
+                if(args.length == 2 && args[0].equalsIgnoreCase("start"))
+                {
+                    final int seconds;
+                    try
+                    {
+                        seconds = Integer.parseInt(args[1]);
+                    }
+                    catch(NumberFormatException exception)
+                    {
+                        sender.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &c/newyear start <time in seconds>"));
+                        return true;
+                    }
+                    new BukkitRunnable()
+                    {
+                        int sec = seconds;
+                        @Override
+                        public void run()
+                        {
+                            if(sec <= 0)
+                            {
+                                this.cancel();
+                                return;
+                            }
+
+                            for(Location location : plugin.getLocationDataManager().getFirework_locations())
+                            {
+                                FireworkUtil.spawnFirework(location);
+                            }
+
+                            sec--;
+                        }
+                    }.runTaskTimer(plugin, 20L, 20L);
+                    sender.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &eHAPPY NEW YEAR!"));
+                    sender.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &eThe fireworks show has started for &c" + seconds + " seconds&e!"));
+                }
+                else
+                {
+                    sender.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &c/newyear start <time in seconds>"));
+                }
+
+            }
             return true;
         }
 
@@ -42,6 +85,7 @@ public class NewYearCommand implements CommandExecutor {
                 if(args[0].equalsIgnoreCase("reload"))
                 {
                     plugin.getLocationDataManager().reload();
+                    plugin.getConfigManager().loadConfig();
                     player.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &aplugin reloaded successfully"));
                     player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
                 }
@@ -62,7 +106,7 @@ public class NewYearCommand implements CommandExecutor {
                 }
                 else
                 {
-                    player.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &c/newyear <reload;start;getgun>"));
+                    sendHelpMessages(player);
                 }
             }
             else if(args.length == 2 && args[0].equalsIgnoreCase("start"))
@@ -102,7 +146,7 @@ public class NewYearCommand implements CommandExecutor {
             }
             else
             {
-                player.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &c/newyear <reload;start;getgun>"));
+                sendHelpMessages(player);
             }
         }
         else
@@ -111,6 +155,14 @@ public class NewYearCommand implements CommandExecutor {
         }
 
         return false;
+    }
+
+    private void sendHelpMessages(CommandSender sender)
+    {
+        sender.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &c/newyear reload &7- reload config.yml and data.yml file"));
+        sender.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &c/newyear start <time in seconds> &7- start firework event"));
+        sender.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &c/newyear getgun &7- get a firework rocket gun"));
+        sender.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &c/setfirework &7- set location for firework rocket"));
     }
 
 }

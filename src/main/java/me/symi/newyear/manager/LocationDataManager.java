@@ -88,6 +88,7 @@ public class LocationDataManager {
     public void reload()
     {
         firework_locations.clear();
+        fileManager.reloadConfig();
         for(String key : fileManager.getConfig().getConfigurationSection("fireworks").getKeys(false))
         {
             Location location = new Location(Bukkit.getWorld(fileManager.getConfig().getString("fireworks." + key + ".world")),

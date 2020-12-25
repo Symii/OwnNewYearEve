@@ -31,19 +31,23 @@ public class OwnNewYearEve extends JavaPlugin {
         locationDataManager = new LocationDataManager(this);
         getCommand("setfirework").setExecutor(new SetFireworkCommand(this));
         getCommand("newyear").setExecutor(new NewYearCommand(this));
-        setupMetrics();
 
         PluginManager pluginManager = getServer().getPluginManager();
         pluginManager.registerEvents(new PlayerListeners(this), this);
         Logger logger = this.getLogger();
 
-        new UpdateChecker(this, 12345).getVersion(version -> {
+        new UpdateChecker(this, 87065).getVersion(version -> {
             if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
                 logger.info("There is not a new update available.");
             } else {
                 logger.info("There is a new update available.");
             }
         });
+
+        if(configManager.isMetrics())
+        {
+            setupMetrics();
+        }
     }
 
     @Override
