@@ -1,6 +1,7 @@
 package me.symi.newyear.listeners;
 
 import me.symi.newyear.OwnNewYearEve;
+import me.symi.newyear.utils.XMaterial;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
@@ -34,7 +35,7 @@ public class PlayerListeners implements Listener {
                 return;
             }
 
-            if ((event.getItem().getType() == Material.GOLDEN_HORSE_ARMOR)
+            if ((event.getItem().getType() == XMaterial.GOLDEN_HORSE_ARMOR.parseMaterial())
                     && (event.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(plugin.getConfigManager().getRocket_gun_name())))
             {
                 final FireworkEffect.Builder fb = FireworkEffect.builder();

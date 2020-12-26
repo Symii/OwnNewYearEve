@@ -1,4 +1,12 @@
+# Plugin metrics is very helpful for plugin owner
 plugin-metrics: true
+
+# /newyear start <time in seconds> max time limit
+# if you are admin you are unlimited
+newyear-start-max-time-limit: 10
+
+# The name of firework gun
 firework-rocket-name: "&cFirework rocket"
+# Firework gun lore
 firework-rocket-lore:
   - "&eRight-click &7to fire a firework!"
