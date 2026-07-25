@@ -1,7 +1,6 @@
 package me.symi.newyear.commands;
 
 import me.symi.newyear.OwnNewYearEve;
-import me.symi.newyear.utils.ChatUtil;
 import me.symi.newyear.utils.FireworkUtil;
 import org.bukkit.*;
 import org.bukkit.command.Command;
@@ -39,7 +38,7 @@ public class NewYearCommand implements CommandExecutor {
                     }
                     catch(NumberFormatException exception)
                     {
-                        sender.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &c/newyear start <time in seconds>"));
+                        sender.sendMessage(plugin.getConfigManager().getStart_usage());
                         return true;
                     }
                     new BukkitRunnable()
@@ -62,12 +61,12 @@ public class NewYearCommand implements CommandExecutor {
                             sec--;
                         }
                     }.runTaskTimer(plugin, 20L, 20L);
-                    sender.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &eHAPPY NEW YEAR!"));
-                    sender.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &eThe fireworks show has started for &c" + seconds + " seconds&e!"));
+                    sender.sendMessage(plugin.getConfigManager().getHappy_new_year());
+                    sender.sendMessage(plugin.getConfigManager().getFireworks_started().replace("{seconds}", String.valueOf(seconds)));
                 }
                 else
                 {
-                    sender.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &c/newyear start <time in seconds>"));
+                    sender.sendMessage(plugin.getConfigManager().getStart_usage());
                 }
 
             }
@@ -84,7 +83,7 @@ public class NewYearCommand implements CommandExecutor {
                 {
                     plugin.getLocationDataManager().reload();
                     plugin.getConfigManager().loadConfig();
-                    player.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &aplugin reloaded successfully"));
+                    player.sendMessage(plugin.getConfigManager().getPlugin_reloaded());
                 }
                 else
                 {
@@ -95,7 +94,7 @@ public class NewYearCommand implements CommandExecutor {
             {
                 if(player.hasPermission("ownnewyeareve.start") || player.hasPermission("ownnewyeareve.admin"))
                 {
-                    player.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &c/newyear start <time in seconds>"));
+                    player.sendMessage(plugin.getConfigManager().getStart_usage());
                 }
                 else
                 {
@@ -113,7 +112,7 @@ public class NewYearCommand implements CommandExecutor {
                     rocket_gun_meta.setLore(plugin.getConfigManager().getRocket_gun_lore());
                     rocket_gun.setItemMeta(rocket_gun_meta);
                     player.getInventory().addItem(rocket_gun);
-                    player.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &afirework gun has been added to your inventory."));
+                    player.sendMessage(plugin.getConfigManager().getFirework_gun_added());
                 }
                 else
                 {
@@ -141,13 +140,13 @@ public class NewYearCommand implements CommandExecutor {
             }
             catch(NumberFormatException exception)
             {
-                player.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &c/newyear start <time in seconds>"));
+                player.sendMessage(plugin.getConfigManager().getStart_usage());
                 return true;
             }
 
             if(!player.hasPermission("ownnewyeareve.admin") && seconds > max_time_limit)
             {
-                player.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &ethe maximum time limit for this command is &c" + max_time_limit + " seconds"));
+                player.sendMessage(plugin.getConfigManager().getMax_time_limit().replace("{limit}", String.valueOf(max_time_limit)));
                 return true;
             }
 
@@ -171,8 +170,8 @@ public class NewYearCommand implements CommandExecutor {
                     sec--;
                 }
             }.runTaskTimer(plugin, 20L, 20L);
-            player.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &eHAPPY NEW YEAR!"));
-            player.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &eThe fireworks show has started for &c" + seconds + " seconds&e!"));
+            player.sendMessage(plugin.getConfigManager().getHappy_new_year());
+            player.sendMessage(plugin.getConfigManager().getFireworks_started().replace("{seconds}", String.valueOf(seconds)));
         }
         else
         {
@@ -187,15 +186,15 @@ public class NewYearCommand implements CommandExecutor {
 
     private void sendHelpMessages(CommandSender sender)
     {
-        sender.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &c/newyear reload &7- reload config.yml and data.yml file"));
-        sender.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &c/newyear start <time in seconds> &7- start firework event"));
-        sender.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &c/newyear getgun &7- get a firework rocket gun"));
-        sender.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &c/setfirework &7- set location for firework rocket"));
+        sender.sendMessage(plugin.getConfigManager().getHelp_reload());
+        sender.sendMessage(plugin.getConfigManager().getHelp_start());
+        sender.sendMessage(plugin.getConfigManager().getHelp_getgun());
+        sender.sendMessage(plugin.getConfigManager().getHelp_setfirework());
     }
 
     private void sendNoPermissionMessage(CommandSender sender)
     {
-        sender.sendMessage(ChatUtil.fixColors("&cI'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is a mistake."));
+        sender.sendMessage(plugin.getConfigManager().getNo_permission());
     }
 
 

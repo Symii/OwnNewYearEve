@@ -10,3 +10,24 @@ firework-rocket-name: "&cFirework rocket"
 # Firework gun lore
 firework-rocket-lore:
   - "&eRight-click &7to fire a firework!"
+
+# Messages
+messages:
+  # SetFireworkCommand messages
+  not-player: "Hey! Sorry, but you can't execute this command."
+  firework-location-added: "&6&lOwnNewYearEve &8» &afirework location added successfully"
+  no-permission: "&cI'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is a mistake."
+  
+  # NewYearCommand messages
+  start-usage: "&6&lOwnNewYearEve &8» &c/newyear start <time in seconds>"
+  happy-new-year: "&6&lOwnNewYearEve &8» &eHAPPY NEW YEAR!"
+  fireworks-started: "&6&lOwnNewYearEve &8» &eThe fireworks show has started for &c{seconds} seconds&e!"
+  plugin-reloaded: "&6&lOwnNewYearEve &8» &aplugin reloaded successfully"
+  firework-gun-added: "&6&lOwnNewYearEve &8» &afirework gun has been added to your inventory."
+  max-time-limit: "&6&lOwnNewYearEve &8» &ethe maximum time limit for this command is &c{limit} seconds"
+  
+  # Help messages
+  help-reload: "&6&lOwnNewYearEve &8» &c/newyear reload &7- reload config.yml and data.yml file"
+  help-start: "&6&lOwnNewYearEve &8» &c/newyear start <time in seconds> &7- start firework event"
+  help-getgun: "&6&lOwnNewYearEve &8» &c/newyear getgun &7- get a firework rocket gun"
+  help-setfirework: "&6&lOwnNewYearEve &8» &c/setfirework &7- set location for firework rocket"

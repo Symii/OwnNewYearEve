@@ -1,7 +1,6 @@
 package me.symi.newyear.commands;
 
 import me.symi.newyear.OwnNewYearEve;
-import me.symi.newyear.utils.ChatUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -21,7 +20,7 @@ public class SetFireworkCommand implements CommandExecutor {
 
         if(!(sender instanceof Player))
         {
-            sender.sendMessage("Hey! Sorry, but you can't execute this command.");
+            sender.sendMessage(plugin.getConfigManager().getNot_player());
             return true;
         }
 
@@ -29,11 +28,11 @@ public class SetFireworkCommand implements CommandExecutor {
         if(player.hasPermission("ownnewyeareve.admin") || player.hasPermission("ownnewyeareve.setfirework"))
         {
             plugin.getLocationDataManager().addLocation(player.getLocation());
-            player.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &afirework location added successfully"));
+            player.sendMessage(plugin.getConfigManager().getFirework_location_added());
         }
         else
         {
-            player.sendMessage(ChatUtil.fixColors("&cI'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is a mistake."));
+            player.sendMessage(plugin.getConfigManager().getNo_permission());
         }
 
         return true;

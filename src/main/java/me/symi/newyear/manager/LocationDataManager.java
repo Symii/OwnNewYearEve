@@ -89,13 +89,16 @@ public class LocationDataManager {
     {
         firework_locations.clear();
         fileManager.reloadConfig();
-        for(String key : fileManager.getConfig().getConfigurationSection("fireworks").getKeys(false))
+        if(fileManager.getConfig().getConfigurationSection("fireworks") != null)
         {
-            Location location = new Location(Bukkit.getWorld(fileManager.getConfig().getString("fireworks." + key + ".world")),
-                    fileManager.getConfig().getInt("fireworks." + key + ".x"),
-                    fileManager.getConfig().getInt("fireworks." + key + ".y"),
-                    fileManager.getConfig().getInt("fireworks." + key + ".z"));
-            firework_locations.add(location);
+            for(String key : fileManager.getConfig().getConfigurationSection("fireworks").getKeys(false))
+            {
+                Location location = new Location(Bukkit.getWorld(fileManager.getConfig().getString("fireworks." + key + ".world")),
+                        fileManager.getConfig().getInt("fireworks." + key + ".x"),
+                        fileManager.getConfig().getInt("fireworks." + key + ".y"),
+                        fileManager.getConfig().getInt("fireworks." + key + ".z"));
+                firework_locations.add(location);
+            }
         }
         Bukkit.getLogger().info("[OwnNewYearEve] Fireworks locations loaded successfully!");
     }
