@@ -1,10 +1,8 @@
 package me.symi.newyear.listeners;
 
 import me.symi.newyear.OwnNewYearEve;
-import me.symi.newyear.utils.XMaterial;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
-import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
@@ -35,7 +33,7 @@ public class PlayerListeners implements Listener {
                 return;
             }
 
-            if ((event.getItem().getType() == XMaterial.GOLDEN_HORSE_ARMOR.parseMaterial())
+            if ((event.getItem().getType() == plugin.getGoldenHorseArmor())
                     && (event.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(plugin.getConfigManager().getRocket_gun_name())))
             {
                 final FireworkEffect.Builder fb = FireworkEffect.builder();
@@ -55,7 +53,7 @@ public class PlayerListeners implements Listener {
                 }
                 f = fb.build();
                 final Player player = event.getPlayer();
-                final Firework fw = (Firework) player.getWorld().spawnEntity(player.getLocation(), EntityType.FIREWORK);
+                final Firework fw = (Firework) player.getWorld().spawnEntity(player.getLocation(), plugin.getFireworkEntityType());
                 final FireworkMeta fwm = fw.getFireworkMeta();
                 fwm.clearEffects();
                 fwm.addEffect(f);

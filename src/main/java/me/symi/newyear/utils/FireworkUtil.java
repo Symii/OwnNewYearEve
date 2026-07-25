@@ -1,5 +1,6 @@
 package me.symi.newyear.utils;
 
+import me.symi.newyear.OwnNewYearEve;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Location;
@@ -11,7 +12,7 @@ import java.util.Random;
 
 public class FireworkUtil {
 
-    public static void spawnFirework(Location location)
+    public static void spawnFirework(Location location, OwnNewYearEve plugin)
     {
 
         final FireworkEffect.Builder fb = FireworkEffect.builder();
@@ -31,7 +32,7 @@ public class FireworkUtil {
         }
         f = fb.build();
 
-        Firework fw = (Firework) location.getWorld().spawnEntity(location, EntityType.FIREWORK);
+        Firework fw = (Firework) location.getWorld().spawnEntity(location, plugin.getFireworkEntityType());
 
         final FireworkMeta fwm = fw.getFireworkMeta();
         fwm.clearEffects();

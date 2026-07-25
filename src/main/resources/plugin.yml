@@ -1,8 +1,8 @@
 name: OwnNewYearEve
 main: me.symi.newyear.OwnNewYearEve
 author: Symi
-version: 1.2
-api-version: 1.16
+version: 2.0
+api-version: 26.2
 website: https://github.com/Symii
 description: With this plugin you can create awesome new year eve fireworks event
 

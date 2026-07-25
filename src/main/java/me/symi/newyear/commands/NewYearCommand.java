@@ -3,8 +3,6 @@ package me.symi.newyear.commands;
 import me.symi.newyear.OwnNewYearEve;
 import me.symi.newyear.utils.ChatUtil;
 import me.symi.newyear.utils.FireworkUtil;
-import me.symi.newyear.utils.XMaterial;
-import me.symi.newyear.utils.XSound;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -58,7 +56,7 @@ public class NewYearCommand implements CommandExecutor {
 
                             for(Location location : plugin.getLocationDataManager().getFirework_locations())
                             {
-                                FireworkUtil.spawnFirework(location);
+                                FireworkUtil.spawnFirework(location, plugin);
                             }
 
                             sec--;
@@ -87,7 +85,6 @@ public class NewYearCommand implements CommandExecutor {
                     plugin.getLocationDataManager().reload();
                     plugin.getConfigManager().loadConfig();
                     player.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &aplugin reloaded successfully"));
-                    player.playSound(player.getLocation(), XSound.ENTITY_PLAYER_LEVELUP.parseSound(), 1.0f, 1.0f);
                 }
                 else
                 {
@@ -110,14 +107,13 @@ public class NewYearCommand implements CommandExecutor {
             {
                 if(player.hasPermission("ownnewyeareve.getgun") || player.hasPermission("ownnewyeareve.admin"))
                 {
-                    ItemStack rocket_gun = XMaterial.GOLDEN_HORSE_ARMOR.parseItem();
+                    ItemStack rocket_gun = new ItemStack(plugin.getGoldenHorseArmor());
                     ItemMeta rocket_gun_meta = rocket_gun.getItemMeta();
                     rocket_gun_meta.setDisplayName(plugin.getConfigManager().getRocket_gun_name());
                     rocket_gun_meta.setLore(plugin.getConfigManager().getRocket_gun_lore());
                     rocket_gun.setItemMeta(rocket_gun_meta);
                     player.getInventory().addItem(rocket_gun);
                     player.sendMessage(ChatUtil.fixColors("&6&lOwnNewYearEve &8» &afirework gun has been added to your inventory."));
-                    player.playSound(player.getLocation(), XSound.ENTITY_EXPERIENCE_ORB_PICKUP.parseSound(), 1.0f, 1.0f);
                 }
                 else
                 {
@@ -169,7 +165,7 @@ public class NewYearCommand implements CommandExecutor {
 
                     for(Location location : plugin.getLocationDataManager().getFirework_locations())
                     {
-                        FireworkUtil.spawnFirework(location);
+                        FireworkUtil.spawnFirework(location, plugin);
                     }
 
                     sec--;

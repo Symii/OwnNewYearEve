@@ -7,6 +7,8 @@ import me.symi.newyear.listeners.PlayerListeners;
 import me.symi.newyear.manager.LocationDataManager;
 import me.symi.newyear.metrics.MetricsLite;
 import me.symi.newyear.utils.UpdateChecker;
+import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -75,6 +77,30 @@ public class OwnNewYearEve extends JavaPlugin {
     public ConfigManager getConfigManager()
     {
         return configManager;
+    }
+
+    public Material getGoldenHorseArmor()
+    {
+        try
+        {
+            return Material.valueOf("GOLDEN_HORSE_ARMOR");
+        }
+        catch (IllegalArgumentException e)
+        {
+            return Material.valueOf("GOLD_BARDING");
+        }
+    }
+
+    public EntityType getFireworkEntityType()
+    {
+        try
+        {
+            return EntityType.valueOf("FIREWORK_ROCKET");
+        }
+        catch (IllegalArgumentException e)
+        {
+            return EntityType.valueOf("FIREWORK");
+        }
     }
 
 }
